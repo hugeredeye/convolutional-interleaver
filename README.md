@@ -13,7 +13,7 @@
 1. Убедитесь, что у вас установлена Julia.
 2. Склонируйте репозиторий:
    ```bash
-   git clone <URL репозитория>
+   git clone https://github.com/hugeredeye/convolutional-interleaver.git
    cd convolutional-interleaver
    ```
 
