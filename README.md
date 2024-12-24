@@ -7,6 +7,8 @@
 - **`interleave.jl`**: Основной файл с реализацией сверточного перемежителя.
 - **`test.jl`**: Тесты для проверки корректности реализации.
 - **`comparison`**: Инструкции и скрипты для сравнения с результатами Simulink.
+- **`interleaved_data.csv` и `simulink_data.csv`**: Папки с CSV-файлами, содержащими результаты работы алгоритмов (Julia и Simulink).
+- **`comparison_plot.png`**: Графики, визуализирующие результаты работы алгоритмов.
 - **`README.md`**: Описание проекта и инструкции по использованию.
 
 ## Установка
@@ -58,14 +60,14 @@ params = InterleaveParams(data, numRegs, regStep, initVal)
 julia_result = interleave(params)
 
 # Сохранение результата для сравнения
-CSV.write("julia_result.csv", DataFrame(julia_result = julia_result))
-println("Результат сохранен в julia_result.csv")
+CSV.write("output/julia_result.csv", DataFrame(julia_result = julia_result))
+println("Результат сохранен в output/julia_result.csv")
 ```
 
 ### Код для MATLAB
 ```matlab
 % Импорт результата из Julia
-julia_result = csvread('julia_result.csv');
+julia_result = csvread('output/julia_result.csv');
 
 % Ваш результат из Simulink
 simulink_result = [1, 0, 0, 2, 0, 0, 3, 0, 0, 4, ...]; % Пример данных, заменить на реальный вывод Simulink
@@ -83,12 +85,11 @@ end
 ```
 
 ### Результаты
-1. **Совпадение**: Если результаты одинаковы, вывод подтвердит, что реализация корректна.
-2. **Различия**: Если результаты различаются, проверьте параметры или обратитесь к документации.
+- **Графики**: В папке `plots` представлены визуализации, показывающие работу алгоритмов на различных наборах данных.
+- **Данные**: В папках `interleaved_data.csv` и `simulink_data.csv` находятся CSV-файлы, содержащие результаты работы алгоритмов Julia и Simulink.
 
 ## Контакты
 - **Байбакова Екатерина Алексеевна**
 - Email: eabaibakova@edu.hse.ru
 - Telegram: @smallbluenose
 - Phone number: +7(996)929-57-33
-
