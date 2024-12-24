@@ -18,6 +18,10 @@
    git clone https://github.com/hugeredeye/convolutional-interleaver.git
    cd convolutional-interleaver
    ```
+   ```
+   cd("convolutional-interleaver")
+
+   ```
 
 ## Использование
 1. Откройте файл `interleave.jl` и настройте параметры перемежения.
