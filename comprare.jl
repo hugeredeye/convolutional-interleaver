@@ -5,12 +5,12 @@ using Plots
 # Загрузка данных из Julia
 julia_data = CSV.read("interleaved_data.csv", DataFrame)
 
-# Загрузка данных из Simulink
+# Загрузка данных из Simulink без заголовков
 simulink_data = CSV.read("simulink_data.csv", DataFrame, header=false)
 
 # Сравнение значений
 julia_values = julia_data.value
-simulink_values = simulink_data.Column1
+simulink_values = simulink_data[:, 1]  # Извлечение данных из первого столбца
 
 # Проверка совпадения
 if julia_values == simulink_values
