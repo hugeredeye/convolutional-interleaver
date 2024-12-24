@@ -1,3 +1,7 @@
+using CSV
+using DataFrames
+using Plots
+
 using Test
 include("interleave.jl")
 
