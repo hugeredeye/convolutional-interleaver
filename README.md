@@ -92,4 +92,8 @@ end
 - **Байбакова Екатерина Алексеевна**
 - Email: eabaibakova@edu.hse.ru
 - Telegram: @smallbluenose
+<<<<<<< HEAD
 - Phone number: +7(996)929-57-33
+=======
+- Phone number: +7(996)929-57-33
+>>>>>>> 60d424ecc8ba35dc36e1373fcb96014750a8a058
