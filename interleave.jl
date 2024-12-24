@@ -42,3 +42,16 @@ if abspath(PROGRAM_FILE) == @__FILE__
 
     println(interleave(params))
 end
+
+using CSV
+using DataFrames
+
+# Вычисление результата
+result = interleave(params)
+
+# Создание DataFrame для сохранения
+df = DataFrame(index=1:length(result), value=result)
+
+# Экспорт результата в CSV
+CSV.write("interleaved_data.csv", df)
+println("Данные сохранены в interleaved_data.csv")
