@@ -1,0 +1,85 @@
+# Сверточный перемежитель на Julia
+
+## Описание
+Проект представляет собой сверточный перемежитель, который соответствует блоку Convolutional Interleaver в Simulink. Реализация позволяет перемежать данные на основе заданных параметров, таких как число регистров, шаг между регистрами и начальные значения.
+
+## Структура репозитория
+- `interleave.jl`: Основной файл с реализацией сверточного перемежителя
+- `compare.jl`: Инструкции и скрипты для сравнения с результатами Simulink
+- `interleaved_data.csv` и `simulink_data.csv`: Папки с CSV-файлами, содержащими результаты работы алгоритмов (Julia и Simulink)
+- `comparison_plot.png`: Графики, визуализирующие результаты работы алгоритмов
+- `README.md`: Описание проекта и инструкции по использованию
+
+## Установка
+1. Убедитесь, что у вас установлена Julia
+2. Склонируйте репозиторий:
+```bash
+git clone https://github.com/hugeredeye/convolutional-interleaver.git
+cd convolutional-interleaver
+```
+
+## Использование
+1. Откройте файл `interleave.jl` и настройте параметры перемежения
+2. Запустите скрипт:
+```bash
+julia interleave.jl
+```
+
+### Параметры
+- `data`: Входной массив данных (например, [1, 2, 3, ..., 20])
+- `numRegs`: Число регистров (например, 3)
+- `regStep`: Шаг между регистрами (например, 2)
+- `initVal`: Начальное значение для незаполненных элементов (например, 0)
+
+## Сравнение с Simulink
+
+### Настройка Simulink
+1. Создайте модель Simulink с использованием блока Convolutional Interleaver
+2. Задайте параметры:
+   - Number of Registers: 3
+   - Register Length Step: 2
+   - Initial Conditions: 0
+3. Используйте источник данных, например, массив [1, 2, 3, ..., 20]
+4. Сохраните результаты выполнения блока в переменную MATLAB
+
+### Код для Julia
+```julia
+using CSV
+
+# Входные параметры
+data = collect(1:20)
+numRegs = 3
+regStep = 2
+initVal = 0
+
+params = InterleaveParams(data, numRegs, regStep, initVal)
+julia_result = interleave(params)
+
+# Сохранение результата для сравнения
+CSV.write("output/julia_result.csv", DataFrame(julia_result = julia_result))
+println("Результат сохранен в output/julia_result.csv")
+```
+
+### Код для MATLAB
+```matlab
+% Импорт результата из Julia
+julia_result = csvread('output/julia_result.csv');
+
+% Ваш результат из Simulink
+simulink_result = [1, 0, 0, 2, 0, 0, 3, 0, 0, 4, ...]; % Пример данных, заменить на реальный вывод Simulink
+
+% Сравнение
+if isequal(julia_result, simulink_result)
+    disp('Результаты совпадают!');
+else
+    disp('Результаты не совпадают.');
+    disp('Результат Julia:');
+    disp(julia_result);
+    disp('Результат Simulink:');
+    disp(simulink_result);
+end
+```
+
+## Результаты
+- **Графики**: В папке `plots` представлены визуализации, показывающие работу алгоритмов на различных наборах данных
+- **Данные**: В папках `interleaved_data.csv` и `simulink_data.csv` находятся CSV-файлы, содержащие результаты работы алгоритмов Julia и Simulink
